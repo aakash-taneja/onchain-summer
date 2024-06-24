@@ -5,3 +5,12 @@ Shopify hosts over 100,000 online stores and millions of product listings. Store
 With our project, 'Onchainads,' Shopify store owners can create promotional Farcaster casts directly from Shopify. Each promotional cast is registered on-chain. Store owners set up an on-chain account with Coinbase Smart Wallet and add DEGEN tokens to the ad network contracts to continue distribution to FC users. 
 
 Whenever Farcaster users engage with these promoted ads by clicking on them, we track the Click-Through-Rate (CTR) to gather analytics. Based on this engagement data, a fee is calculated and processed through our registered smart contracts on Base.
+
+
+### Running Shopify App Platform
+
+1. Install Shopify Command Lines
+https://shopify.dev/docs/api/shopify-cli
+
+2. Create a partner account on Shopify
+https://www.shopify.com/partners?shpxid=4b9babc3-1E88-438C-AA61-E6CDD1646858
