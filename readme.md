@@ -10,16 +10,20 @@ Whenever Farcaster users engage with these promoted ads by clicking on them, we 
 ### Running Application
 
 1. Install Shopify Command Lines
+
 https://shopify.dev/docs/api/shopify-cli
 
 2. Create a partner account on Shopify
+
 https://www.shopify.com/partners?shpxid=4b9babc3-1E88-438C-AA61-E6CDD1646858
 
 3. Install Cloudflare locally
 
 4. Run Cloudflare tunner locally
+
 cloudflared tunnel --url http://localhost:3000
 
 5. Run Shopify app platform locally with tunner flag
+
 shopify app dev --tunnel-url [_tunner_url_on_port_3000_]
 
