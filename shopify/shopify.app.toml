@@ -3,7 +3,7 @@
 client_id = "d20b1a63d87f928957d74daf41c5a961"
 name = "onchainads"
 handle = "onchainads"
-application_url = "https://futures-commitments-placement-hay.trycloudflare.com"
+application_url = "https://becoming-requested-notes-worthy.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://futures-commitments-placement-hay.trycloudflare.com/auth/callback",
-  "https://futures-commitments-placement-hay.trycloudflare.com/auth/shopify/callback",
-  "https://futures-commitments-placement-hay.trycloudflare.com/api/auth/callback"
+  "https://becoming-requested-notes-worthy.trycloudflare.com/auth/callback",
+  "https://becoming-requested-notes-worthy.trycloudflare.com/auth/shopify/callback",
+  "https://becoming-requested-notes-worthy.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -26,7 +26,7 @@ export function WalletCard() {
         try {
           const bal = await getBalance(config, {
             address: account?.address,
-            token: '0x22A4FA38D3E0a3E791FDb0b9C48Fd42FBCFeE84b',
+            token: '0x76160579627CD45Ba88f23E5919C61444AF53D5A',
           });
   
           console.log('Balance', bal);
