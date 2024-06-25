@@ -6,6 +6,8 @@ With our project, 'Onchainads,' Shopify store owners can create promotional Farc
 
 Whenever Farcaster users engage with these promoted ads by clicking on them, we track the Click-Through-Rate (CTR) to gather analytics. Based on this engagement data, a fee is calculated and processed through our registered smart contracts on Base.
 
+![table](./shopify_dashboard.png)
+
 ### Overview of Architecture
 
 ![table](./diagram_architecture.png)
