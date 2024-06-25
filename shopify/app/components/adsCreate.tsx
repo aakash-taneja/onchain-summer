@@ -4,11 +4,12 @@ import {ImageIcon} from '@shopify/polaris-icons';
 import {useState, useCallback} from 'react';
 import ProductCard from './productCard';
 import {useMint} from '.././hooks/useMint';
+import { uploadTextToLighthouse } from '~/utils/lightHouseStorage';
 
 export default function AdsCreate() {
     const [value, setValue] = useState('1776 Barnes Street\nOrlando, FL 32801');
     const [product, setProduct] = useState();
-    const [uri, setUri] = useState();
+    const [uri, setUri] = useState<any>();
     const [amount, setAmount] = useState('1');
     const hookMint = useMint();
 
@@ -50,6 +51,18 @@ export default function AdsCreate() {
     }
   }
   // [END select-products]
+
+  const createURI = async () => {
+    try {
+      const data = {text: value, ...{product}};
+      const uri = uploadTextToLighthouse(data);
+      
+      setUri(uri);
+    } catch (error) {
+      console.error('Error uploading to lighthouse', error);
+    }
+    
+  }
 
   return (
     <Card>
