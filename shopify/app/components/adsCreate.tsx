@@ -1,16 +1,20 @@
-import React from 'react';
-import {Card, TextField, InlineStack, Button, Text, LegacyStack, BlockStack} from '@shopify/polaris';
-import {ImageIcon} from '@shopify/polaris-icons';
+import React, { useEffect } from 'react';
+import {Card, TextField, InlineStack, Button, Text, LegacyStack, BlockStack, InlineError} from '@shopify/polaris';
+import {ImageIcon, EditIcon} from '@shopify/polaris-icons';
 import {useState, useCallback} from 'react';
 import ProductCard from './productCard';
 import {useMint} from '.././hooks/useMint';
 import { uploadTextToLighthouse } from '~/utils/lightHouseStorage';
+import { CastCard } from './castCard';
 
 export default function AdsCreate() {
-    const [value, setValue] = useState('1776 Barnes Street\nOrlando, FL 32801');
+    const [editing, setEditing] = useState(true);
+    const [value, setValue] = useState<any>();
     const [product, setProduct] = useState();
     const [uri, setUri] = useState<any>();
-    const [amount, setAmount] = useState('1');
+    const [txn, setTxn] = useState<any>();
+    const [error, setError] = useState<any>();
+    const [amount, setAmount] = useState<any>();
     const hookMint = useMint();
 
     const handleAmount = useCallback(
@@ -54,22 +58,37 @@ export default function AdsCreate() {
 
   const createURI = async () => {
     try {
-      const data = {text: value, ...{product}};
-      const uri = uploadTextToLighthouse(data);
-      
+      const data = JSON.stringify({text: value, ...{product}});
+      const uri = await uploadTextToLighthouse(data);
+
+      console.log('URI', uri);
       setUri(uri);
+      hookMint?.handleMint(uri, amount);
+      setEditing(false);
     } catch (error) {
       console.error('Error uploading to lighthouse', error);
     }
     
   }
 
+  useEffect(() => {
+    if (amount > 200) {
+      setError('Wallet Balance low for this Ad topup');
+    } else {
+      setError(null);
+    }
+  }, [amount])
+
   return (
     <Card>
         <Text as="h3" variant="headingMd">
             Cast Ads to Farcaster
         </Text>
-        <div style={{marginTop: '10px'}}>
+        
+
+        
+        {editing && <>
+          <div style={{marginTop: '10px'}}>
                 <TextField
             label="Cast here"
             value={value}
@@ -107,26 +126,37 @@ export default function AdsCreate() {
             />
             </LegacyStack>
         </div>
-       
+
+        <InlineError message={error} fieldID="myFieldID" />
+
         <div style={{marginTop: '30px'}}>
         <InlineStack direction="row" align="space-between" blockAlign="center">
             <Button icon={ImageIcon} accessibilityLabel="Add theme" />
-            {!uri && 
-              <Button variant="primary" onClick={hookMint?.handleMint}
+            
+              <Button variant="primary" onClick={createURI} disabled={!value || !amount || !product?.productId || error}
               >
               Mint Ad Onchain
               </Button>
-            }
-            {uri && 
-              <Button variant="primary" 
-              disabled={!product?.productId || !amount} 
-              url={`https://warpcast.com/~/compose?text=${value}&embeds[]=https://onchainads.vercel.app/api`}
-              target="_blank">
-              Cast on Farcaster
-              </Button>
-            }
+           
         </InlineStack>
         </div>
+        </>
+         }
+
+        {!editing && uri && <div style={{marginTop: '10px'}}>
+          <CastCard cast={{text: value, ...product, uri: uri}}/>
+          <div style={{marginTop: '30px'}}>
+            <InlineStack direction="row" align="space-between" blockAlign="center">
+                <Button icon={EditIcon} accessibilityLabel="Add theme" onClick={() => {setEditing(true)}} />
+                <Button variant="primary" 
+                disabled={!product?.productId || !amount} 
+                url={`https://warpcast.com/~/compose?text=${value}&embeds[]=https://onchainads.vercel.app/api/${uri}`}
+                target="_blank">
+                Cast on Farcaster
+                </Button>
+            </InlineStack>
+          </div>
+        </div>}
     </Card>
   );
 }

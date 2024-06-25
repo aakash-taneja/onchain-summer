@@ -1,20 +1,42 @@
-import { useAccount } from 'wagmi';
+import { useAccount, useWaitForTransactionReceipt } from 'wagmi';
 import { useWriteContracts, useCapabilities } from 'wagmi/experimental';
-import { useMemo} from "react";
+import { useEffect, useMemo, useState} from "react";
+import { config } from "~/config";
 
 const abi = [
-    {
-      stateMutability: 'nonpayable',
-      type: 'function',
-      inputs: [{ name: 'to', type: 'address' }],
-      name: 'safeMint',
-      outputs: [],
-    }
+    {  "inputs": [
+        {    "internalType": "string",
+         "name": "tokenURI",    "type": "string"
+        },   {
+         "internalType": "uint256",    "name": "mintingFee",
+         "type": "uint256"   },
+        {    "internalType": "uint256",
+         "name": "maxSupply",    "type": "uint256"
+        }  ],
+       "name": "addNFT",  "outputs": [],
+       "stateMutability": "nonpayable",  "type": "function"
+      }
   ] as const
 
 export function useMint() {
     const account = useAccount()
-    const { writeContracts } = useWriteContracts() 
+    const [hash, setHash] = useState<any>();
+
+    const { writeContracts } = useWriteContracts({
+        mutation: { onSuccess: (id: any) => {setHash(id)}},
+      });
+
+    const result = useWaitForTransactionReceipt({
+        hash: hash,
+        onSuccess(data: any) {
+            console.log('Transaction success:', data)
+          },
+        onError(error: any) {
+            console.error('Error:', error)
+        },
+    })
+
+   
 
     const { data: availableCapabilities } = useCapabilities({
         account: account.address,
@@ -35,19 +57,26 @@ export function useMint() {
     }
     return {};
     }, [availableCapabilities, account.chainId]);
- 
-    const handleMint = () => {
+
+    useEffect(() => {
+        console.log('Hash is', hash)
+    }, [hash])
+
+    
+    
+    const handleMint = (uri: any, amount: any) => {
         writeContracts({ 
-        contracts: [ 
-            { 
-            address: "0x119Ea671030FBf79AB93b436D2E20af6ea469a19", 
-            abi, 
-            functionName: "safeMint", 
-            args: [account.address], 
-            }, 
-        ], 
-        }) 
+            contracts: [ 
+                { 
+                address: config.MINT_ADDRESS, 
+                abi, 
+                functionName: "addNFT", 
+                args: [uri, amount * 1000000000000000000, 1000], 
+                }, 
+            ], 
+            })
     }
+    
 
     return ({
         handleMint
