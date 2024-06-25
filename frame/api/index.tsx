@@ -15,19 +15,19 @@ export const app = new Frog({
   title: "nftads",
   assetsPath: "/",
   basePath: "/api",
-  hub: {
-    apiUrl: "https://hubs.airstack.xyz",
-    fetchOptions: {
-      headers: {
-        "x-airstack-hubs": "144b4e7af6f3448f3891244d9b19f581b",
-      },
-    },
-  },
+  // hub: {
+  //   apiUrl: "https://hubs.airstack.xyz",
+  //   fetchOptions: {
+  //     headers: {
+  //       "x-airstack-hubs": "144b4e7af6f3448f3891244d9b19f581b",
+  //     },
+  //   },
+  // },
 });
 
-app.frame("/:cid", (c) => {
+app.frame("/", (c) => {
   const { status } = c;
-  const cid = c.req.param("cid");
+  // const cid = c.req.param("cid");
   return c.res({
     image: (
       <div
@@ -56,13 +56,13 @@ app.frame("/:cid", (c) => {
             whiteSpace: "pre-wrap",
           }}
         >
-          {status === "response" ? `Done` : `passed cid is : ${cid}`}
+          {/* {status === "response" ? `Done` : `passed cid is : ${cid}`} */}
         </div>
-        <img
+        {/* <img
           height={"150px"}
           width={"200px "}
           src={`https://gateway.lighthouse.storage/ipfs/${cid}`}
-        />
+        /> */}
       </div>
     ),
     intents: [

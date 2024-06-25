@@ -1,5 +1,6 @@
 import lighthouse from "@lighthouse-web3/sdk";
-import { config } from "@/config/index";
+import { config } from "~/config";
+
 
 export const uploadFileToLightHouse = async (e: any, progressCallback: any) => {
   const output = await lighthouse.upload(
