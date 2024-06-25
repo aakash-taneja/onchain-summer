@@ -1,3 +1,6 @@
+# Onchainads 
+Onchain Summer Hack Project 2024
+
 ### Quick intro about our project:
 
 Shopify hosts over 100,000 online stores and millions of product listings. Store owners traditionally promote their products using Google and Facebook Ads. We're developing a Shopify App Platform to extend this promotional reach to Farcaster clients.
