@@ -1,4 +1,4 @@
-import { getBalance } from '@wagmi/core';
+
 import { useAccount } from 'wagmi';
 
 import {
@@ -9,39 +9,18 @@ import {
   } from "@shopify/polaris";
 
 import BlueCreateWalletButton from "../components/walletButton";
-import { SignIn } from "~/components/signIn";
 import ClaimCard from "./claimCard";
-import { useEffect, useState } from "react";
-
-import {config} from "../wagmi";
+import { useBalance } from '~/hooks/useBalance';
+import { useEffect } from 'react';
 
 
 export function WalletCard() {
-    const [balance, setBalance] = useState<any>();
+    const hookBalance = useBalance();
     const account = useAccount();
 
     useEffect(() => {
-      // Define an async function to handle the async operation
-      const fetchBalance = async () => {
-        try {
-          const bal = await getBalance(config, {
-            address: account?.address,
-            token: '0x76160579627CD45Ba88f23E5919C61444AF53D5A',
-          });
-  
-          console.log('Balance', bal);
-  
-          // Set the balance state with the resolved value
-          setBalance(bal);
-        } catch (error) {
-          console.error('Error fetching balance:', error);
-        }
-      };
-  
-      // Call the async function
-      fetchBalance();
-    }, []); // Empty dependency array ensures this effect runs only once after the initial render
-  
+      hookBalance?.fetchBalance()
+    }, [account?.address])
 
     return (
         <Card width="100%">
@@ -95,10 +74,9 @@ export function WalletCard() {
           <BlueCreateWalletButton/>
           {account?.address && 
           <>
-            Balance is {balance?.symbol} {balance?.formatted}
+            Balance is {hookBalance?.balance?.symbol} {hookBalance?.balance?.formatted}
           </>}
-          {/* <SignIn /> */}
-          <ClaimCard />
+          {hookBalance?.balance?.formatted <200 && <ClaimCard />}
         </BlockStack>
       </Card>
     )

@@ -1,6 +1,7 @@
 import { useAccount } from 'wagmi';
 import { useWriteContracts, useCapabilities } from 'wagmi/experimental';
 import { useMemo} from "react";
+import { config } from "~/config";
 
 const abi = [ 
     { 
@@ -41,7 +42,7 @@ export function useClaim() {
         writeContracts({ 
         contracts: [ 
             { 
-            address: '0x3B976281f397C8f207d3e39f33EE3ac3c04C092B', 
+            address: config.CLAIM_ADDRESS, 
             abi, 
             functionName: "airdrop", 
             args: [],  

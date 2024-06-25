@@ -3,7 +3,7 @@
 client_id = "d20b1a63d87f928957d74daf41c5a961"
 name = "onchainads"
 handle = "onchainads"
-application_url = "https://becoming-requested-notes-worthy.trycloudflare.com"
+application_url = "https://phi-lauren-punishment-gravity.trycloudflare.coM"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://becoming-requested-notes-worthy.trycloudflare.com/auth/callback",
-  "https://becoming-requested-notes-worthy.trycloudflare.com/auth/shopify/callback",
-  "https://becoming-requested-notes-worthy.trycloudflare.com/api/auth/callback"
+  "https://phi-lauren-punishment-gravity.trycloudflare.coM/auth/callback",
+  "https://phi-lauren-punishment-gravity.trycloudflare.coM/auth/shopify/callback",
+  "https://phi-lauren-punishment-gravity.trycloudflare.coM/api/auth/callback"
 ]
 
 [webhooks]

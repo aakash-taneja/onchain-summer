@@ -9,7 +9,7 @@ import {
   import { useAccount } from 'wagmi';
 import { useClaim } from '~/hooks/useClaim';
   
-  export default function ClaimCard() {
+  export default function ClaimCard({fetchBalance}: any) {
     const account = useAccount();
     const hookClaim = useClaim();
 
