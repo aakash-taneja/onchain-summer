@@ -2,9 +2,9 @@ import lighthouse from "@lighthouse-web3/sdk";
 import { config } from "~/config";
 
 
-export const uploadFileToLightHouse = async (e: any, progressCallback: any) => {
+export const uploadFileToLightHouse = async (file: any) => {
   const output = await lighthouse.upload(
-    e,
+    file,
     config.LIGHTHOUSE_API_KEY,
     false,
     undefined

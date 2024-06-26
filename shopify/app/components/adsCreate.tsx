@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
+import {useState, useCallback} from 'react';
 import {Card, TextField, InlineStack, Button, Text, LegacyStack, BlockStack, InlineError} from '@shopify/polaris';
 import {ImageIcon, EditIcon} from '@shopify/polaris-icons';
-import {useState, useCallback} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ProductCard from './productCard';
 import {useMint} from '.././hooks/useMint';
-import { uploadTextToLighthouse } from '~/utils/lightHouseStorage';
+import { displayImage, uploadFileToLightHouse, uploadTextToLighthouse } from '~/utils/lightHouseStorage';
 import { CastCard } from './castCard';
+import { MediaUpload } from './mediaUpload';
 
 export default function AdsCreate() {
     const [editing, setEditing] = useState(true);
     const [value, setValue] = useState<any>();
+    const [media, setMedia] = useState<any>();
     const [product, setProduct] = useState();
     const [uri, setUri] = useState<any>();
     const [txn, setTxn] = useState<any>();
@@ -56,9 +59,22 @@ export default function AdsCreate() {
   }
   // [END select-products]
 
+  const uploadImage = async (file: any) => {
+    setError(null);
+    try {
+      console.log('Image file is', file)
+      const imgUri = await uploadFileToLightHouse(file);
+      console.log('imageURI', imgUri);
+      setMedia(displayImage(imgUri));
+    } catch (error) {
+      console.error('Error uploading image to lighthouse', error);
+      setError('Error uploading image');
+    }
+  }
+
   const createURI = async () => {
     try {
-      const data = JSON.stringify({text: value, ...{product}});
+      const data = JSON.stringify({adId: uuidv4(), text: value, media: media, ...{product}});
       const uri = await uploadTextToLighthouse(data);
 
       console.log('URI', uri);
@@ -93,9 +109,13 @@ export default function AdsCreate() {
             label="Cast here"
             value={value}
             onChange={handleChange}
-            multiline={4}
+            multiline={3}
             autoComplete="off"
             />
+             </div>
+
+        <div style={{marginTop: '10px'}}>
+        <MediaUpload triggerUpload={uploadImage} />
         </div>
             
         {product && 

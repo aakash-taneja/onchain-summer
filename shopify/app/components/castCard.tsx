@@ -4,11 +4,11 @@ import React from 'react';
 export function CastCard({cast}: any) {
   return (
     <MediaCard
-      title={cast?.text}
       primaryAction={{
         content: 'Check Product',
         onAction: () => {},
       }}
+      description={cast?.text}
       popoverActions={[{content: 'Dismiss', onAction: () => {}}]}
     >
       <VideoThumbnail
