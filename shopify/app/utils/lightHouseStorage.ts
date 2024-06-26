@@ -3,8 +3,9 @@ import { config } from "~/config";
 
 
 export const uploadFileToLightHouse = async (file: any) => {
+  const formatedFile = {0: file, length: 1}
   const output = await lighthouse.upload(
-    file,
+    formatedFile,
     config.LIGHTHOUSE_API_KEY,
     false,
     undefined

@@ -6,17 +6,20 @@ import {
     Card,
     BlockStack,
     Link,
+    Button
   } from "@shopify/polaris";
 
 import BlueCreateWalletButton from "../components/walletButton";
 import ClaimCard from "./claimCard";
 import { useBalance } from '~/hooks/useBalance';
 import { useEffect } from 'react';
+import { useApprove } from '~/hooks/useApprove';
 
 
 export function WalletCard() {
     const hookBalance = useBalance();
     const account = useAccount();
+    const hookApprove = useApprove();
 
     useEffect(() => {
       hookBalance?.fetchBalance()
@@ -77,6 +80,9 @@ export function WalletCard() {
             Balance is {hookBalance?.balance?.symbol} {hookBalance?.balance?.formatted}
           </>}
           {hookBalance?.balance?.formatted <200 && <ClaimCard />}
+          <Button onClick={hookApprove?.handleApprove}>
+            Approve
+          </Button>
         </BlockStack>
       </Card>
     )

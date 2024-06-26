@@ -5,16 +5,21 @@ export function CastCard({cast}: any) {
   return (
     <MediaCard
       primaryAction={{
-        content: 'Check Product',
+        content: `Price $${cast?.productPrice}`,
         onAction: () => {},
       }}
       description={cast?.text}
       popoverActions={[{content: 'Dismiss', onAction: () => {}}]}
     >
-      <VideoThumbnail
-        videoLength={80}
-        thumbnailUrl="https://burst.shopifycdn.com/photos/business-woman-smiling-in-office.jpg?width=1850"
-        onClick={() => console.log('clicked')}
+      <img
+        alt=""
+        width="100%"
+        height="100%"
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
+        src={cast?.media}
       />
     </MediaCard>
   );

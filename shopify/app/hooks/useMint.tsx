@@ -4,18 +4,29 @@ import { useEffect, useMemo, useState} from "react";
 import { config } from "~/config";
 
 const abi = [
-    {  "inputs": [
-        {    "internalType": "string",
-         "name": "tokenURI",    "type": "string"
-        },   {
-         "internalType": "uint256",    "name": "mintingFee",
-         "type": "uint256"   },
-        {    "internalType": "uint256",
-         "name": "maxSupply",    "type": "uint256"
-        }  ],
-       "name": "addNFT",  "outputs": [],
-       "stateMutability": "nonpayable",  "type": "function"
-      }
+    { 
+        "inputs": [ 
+          { 
+            "internalType": "string", 
+            "name": "_adId", 
+            "type": "string" 
+          }, 
+          { 
+            "internalType": "string", 
+            "name": "_contentUri", 
+            "type": "string" 
+          }, 
+          { 
+            "internalType": "uint256", 
+            "name": "_adBalance", 
+            "type": "uint256" 
+          } 
+        ], 
+        "name": "createAd", 
+        "outputs": [], 
+        "stateMutability": "nonpayable", 
+        "type": "function" 
+      },
   ] as const
 
 export function useMint() {
@@ -64,14 +75,14 @@ export function useMint() {
 
     
     
-    const handleMint = (uri: any, amount: any) => {
+    const handleMint = (adId: any, uri: any, amount: any) => {
         writeContracts({ 
             contracts: [ 
                 { 
                 address: config.MINT_ADDRESS, 
                 abi, 
-                functionName: "addNFT", 
-                args: [uri, amount * 1000000000000000000, 1000], 
+                functionName: "createAd", 
+                args: [adId, uri, amount * 1000000000000000000], 
                 }, 
             ], 
             })

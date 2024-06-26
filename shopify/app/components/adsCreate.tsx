@@ -11,6 +11,7 @@ import { MediaUpload } from './mediaUpload';
 
 export default function AdsCreate() {
     const [editing, setEditing] = useState(true);
+    const [adId, setAdId] = useState<any>();
     const [value, setValue] = useState<any>();
     const [media, setMedia] = useState<any>();
     const [product, setProduct] = useState();
@@ -74,12 +75,19 @@ export default function AdsCreate() {
 
   const createURI = async () => {
     try {
-      const data = JSON.stringify({adId: uuidv4(), text: value, media: media, ...{product}});
+      let _adId;
+      if (!adId) {
+        _adId = uuidv4()
+        setAdId(_adId);
+      } else {
+        _adId = adId;
+      }
+      const data = JSON.stringify({adId: _adId, text: value, media: media, ...{product}});
       const uri = await uploadTextToLighthouse(data);
 
-      console.log('URI', uri);
+      console.log('URI, adId', uri, _adId);
       setUri(uri);
-      hookMint?.handleMint(uri, amount);
+      hookMint?.handleMint(_adId, uri, amount);
       setEditing(false);
     } catch (error) {
       console.error('Error uploading to lighthouse', error);
@@ -134,7 +142,7 @@ export default function AdsCreate() {
 
         <div style={{marginTop: '10px'}}>
             <LegacyStack>
-            <LegacyStack.Item fill>Add DGENs</LegacyStack.Item>
+            <LegacyStack.Item fill>Topup ad with DGs</LegacyStack.Item>
             <TextField
                 label="Price"
                 labelHidden
@@ -150,8 +158,7 @@ export default function AdsCreate() {
         <InlineError message={error} fieldID="myFieldID" />
 
         <div style={{marginTop: '30px'}}>
-        <InlineStack direction="row" align="space-between" blockAlign="center">
-            <Button icon={ImageIcon} accessibilityLabel="Add theme" />
+        <InlineStack direction="row-reverse" align="space-between" blockAlign="center">
             
               <Button variant="primary" onClick={createURI} disabled={!value || !amount || !product?.productId || error}
               >
@@ -164,7 +171,7 @@ export default function AdsCreate() {
          }
 
         {!editing && uri && <div style={{marginTop: '10px'}}>
-          <CastCard cast={{text: value, ...product, uri: uri}}/>
+          <CastCard cast={{text: value, media: media, ...product, uri: uri}}/>
           <div style={{marginTop: '30px'}}>
             <InlineStack direction="row" align="space-between" blockAlign="center">
                 <Button icon={EditIcon} accessibilityLabel="Add theme" onClick={() => {setEditing(true)}} />
