@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 // import "./NFTWithAffiliates.sol";
-// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract OnChainAd is Ownable {
@@ -67,7 +67,7 @@ contract OnChainAd is Ownable {
         totalNetworkBalance += _adBalance;
         totalActiveAds++;
 
-        emit AdCreated(_adId, msg.sender, _contentUri, ads[_adId].balance);
+        emit AdCreated(_adId, msg.sender, _contentUri, adIdToAd[_adId].balance);
     }
 
     function requestAdRemoval(string memory _adId) public {
@@ -87,7 +87,7 @@ contract OnChainAd is Ownable {
     }
 
     function removeAd(string memory _adId) public onlyOwner {
-        Ad storage ad = ads[_adId];
+        Ad storage ad = adIdToAd[_adId];
         require(ad.removalRequested, "Ad removal not requested by owner");
 
         uint256 creatorBalance = ad.balance >= 0 ? uint256(ad.balance) : 0;
