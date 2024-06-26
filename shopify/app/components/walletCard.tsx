@@ -80,9 +80,9 @@ export function WalletCard() {
             Balance is {hookBalance?.balance?.symbol} {hookBalance?.balance?.formatted}
           </>}
           {hookBalance?.balance?.formatted <200 && <ClaimCard />}
-          <Button onClick={hookApprove?.handleApprove}>
+          {/* <Button onClick={hookApprove?.handleApprove}>
             Approve
-          </Button>
+          </Button> */}
         </BlockStack>
       </Card>
     )
