@@ -21,7 +21,6 @@ Whenever Farcaster users engage with these promoted ads by clicking on them, we 
 1. DeGen - 0x76160579627CD45Ba88f23E5919C61444AF53D5A
 2. Airdrop - 0x868c539269b3Cc51B00b34D3294c25Fc09cCd06c
 3. OnChainAd - 0xa5d88f17AB42Cbe9EF68177a815D218c1DE650AD
-4. NFTWithAffiliates - 0x2a12e7bcC4662227Ddd28b60627d9dc25598be1A
 
 ### Running Application
 
