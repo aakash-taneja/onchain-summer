@@ -3,7 +3,7 @@
 client_id = "d20b1a63d87f928957d74daf41c5a961"
 name = "onchainads"
 handle = "onchainads"
-application_url = "https://kelkoo-rank-errors-watched.trycloudflare.com"
+application_url = "https://customers-valentine-ci-harassment.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://kelkoo-rank-errors-watched.trycloudflare.com/auth/callback",
-  "https://kelkoo-rank-errors-watched.trycloudflare.com/auth/shopify/callback",
-  "https://kelkoo-rank-errors-watched.trycloudflare.com/api/auth/callback"
+  "https://customers-valentine-ci-harassment.trycloudflare.com/auth/callback",
+  "https://customers-valentine-ci-harassment.trycloudflare.com/auth/shopify/callback",
+  "https://customers-valentine-ci-harassment.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

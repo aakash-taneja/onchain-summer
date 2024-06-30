@@ -27,6 +27,8 @@ Whenever Farcaster users engage with these promoted ads by clicking on them, we 
 
 ![table](./diagram_architecture.png)
 
+![table](./shopifycast.png)
+
 ### Contracts addresses on base sepolia testnet
 
 1. DeGen - 0x76160579627CD45Ba88f23E5919C61444AF53D5A
