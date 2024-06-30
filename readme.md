@@ -18,6 +18,8 @@ Whenever Farcaster users engage with these promoted ads by clicking on them, we 
 
 ![table](./shopify_dashboard.png)
 
+![table](./shopifycast.png)
+
 ### Target Audience: 
 * NFT creators wanting to sell digital art, collectibles, or utility tokens with Shopify
 * Businesses using Shopify for tokenizing real-world assets (e.g., real estate, commodities, luxury goods)
@@ -26,8 +28,6 @@ Whenever Farcaster users engage with these promoted ads by clicking on them, we 
 ### Overview of Architecture
 
 ![table](./diagram_architecture.png)
-
-![table](./shopifycast.png)
 
 ### Contracts addresses on base sepolia testnet
 
