@@ -3,7 +3,7 @@
 client_id = "d20b1a63d87f928957d74daf41c5a961"
 name = "onchainads"
 handle = "onchainads"
-application_url = "https://leaders-pts-ultram-agent.trycloudflare.com"
+application_url = "https://kelkoo-rank-errors-watched.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://leaders-pts-ultram-agent.trycloudflare.com/auth/callback",
-  "https://leaders-pts-ultram-agent.trycloudflare.com/auth/shopify/callback",
-  "https://leaders-pts-ultram-agent.trycloudflare.com/api/auth/callback"
+  "https://kelkoo-rank-errors-watched.trycloudflare.com/auth/callback",
+  "https://kelkoo-rank-errors-watched.trycloudflare.com/auth/shopify/callback",
+  "https://kelkoo-rank-errors-watched.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
